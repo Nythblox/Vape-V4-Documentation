@@ -148,3 +148,14 @@ local MyTargets = MyModule:CreateTargets({
     NPCs = false     -- Don't target NPCs by default
 })
 ```
+
+## Tabs
+
+To create a tab (or catergory):
+```lua
+local MyCategory = vape:CreateCategory({
+    Name = "MyCategory",
+    Icon = "iconId", -- Optional: Roblox asset ID for the icon
+    Description = "This is my custom category" -- Optional
+})
+```
