@@ -1,58 +1,141 @@
-# Vape V4 Documentation
-This documentation will teach you how to create modules, tooltips, ETC
-> [!WARNING]
-> This isnt a real documentation by owner, Module creating, and more, they may not work.
-## Modules
-Modules are those toggles you can interact with, like Speed, Killaura, and more. To create an module simply add this in universal.lua or something.
+## Creating Modules
+
+Modules are the main containers for groups of settings. To create a module:
+
 ```lua
-local Module = vape.Categories.Combat:CreateModule({
-    Name = 'ModuleName',
+local MyModule = vape.Categories.SomeCategory:CreateModule({
+    Name = "ModuleName",
     Function = function(callback)
+        -- Code that runs when module is toggled
         if callback then
-            print("Toggled on")
+            -- When enabled
         else
-            print("Toggled off")
+            -- When disabled
         end
     end,
-    Tooltip = 'Module tooltip'
+    Tooltip = "Description of what this module does" -- Optional
 })
 ```
-The code is pretty self explanatory to edit..
-## Module Settings
-Module settings can let you change how a module works, for example. A speed module, you can add a toggle or slider to change the speed up or down. To create these, simply do this
+
+## Creating Sliders
+
+Sliders allow numerical value selection within a range:
+
 ```lua
-local ModuleToggle = Module:CreateToggle({
-    Name = 'Module Toggle Name',
-    Default = false,
-    Function = function(callback)
-        print('Hello')
+local MySlider = MyModule:CreateSlider({
+    Name = "SliderName",
+    Min = 0,         -- Minimum value
+    Max = 100,       -- Maximum value
+    Default = 50,    -- Default value
+    Function = function(value)
+        -- Code that runs when slider value changes
+        print("New value:", value)
     end
 })
 ```
-Code is also self explanatory. And you can add sliders.
+
+## Creating ColorPickers
+
+ColorPickers allow selecting a color with HSV values:
+
 ```lua
-local ModuleSlider = Module:CreateSlider({
-    Name = 'Slider',
-    Min = 0,
-    Max = 10,
-    Default = 5
-})
-```
-I dont know but you probably gotta do this.
-```lua
-local ModuleSlider = Module:CreateSlider({
-    Name = 'Slider',
-    Min = 0,
-    Max = 10,
-    Default = 5
-    Function = function(callback)
-        print("New callback: " .. callback)
+local MyColor = MyModule:CreateColorPicker({
+    Name = "ColorName",
+    Default = {      -- Default color in HSV
+        Hue = 0.5,
+        Sat = 1,
+        Value = 1
+    },
+    Function = function(color)
+        -- Code that runs when color changes
+        print("New color HSV:", color.Hue, color.Sat, color.Value)
+        -- Convert to RGB color if needed:
+        local rgbColor = Color3.fromHSV(color.Hue, color.Sat, color.Value)
     end
 })
 ```
-## Notifications
-Vape has built in notifications you can add, heres how you can do it
+
+## Creating Notifications
+
+Notifications display temporary messages to the user:
+
 ```lua
-notif("Notification Text", "Notifiaction Subtext", 5, "warning")
+-- Using the notif function seen in your code
+notif("Title", "Message content", 5) -- Title, message, duration in seconds
+
+-- Or the full version
+vape:CreateNotification("Title", "Message content", 5, "info") -- Title, message, duration, type (info, alert, warning)
 ```
-You can do more than just warning, Alert, default (by not adding a type), Thats the end, I really dont know any more.
+
+## Creating Dropdowns
+
+Dropdowns allow selecting from a list of options:
+
+```lua
+local MyDropdown = MyModule:CreateDropdown({
+    Name = "DropdownName",
+    List = {"Option1", "Option2", "Option3"}, -- List of options
+    Function = function(selected)
+        -- Code that runs when selection changes
+        print("Selected:", selected)
+    end
+})
+```
+
+## Creating Labels
+
+Labels display static text:
+
+```lua
+local MyLabel = MyModule:CreateLabel({
+    Name = "LabelText",
+    Function = function()
+        -- Optional function that runs when the label is clicked
+    end
+})
+```
+
+## Creating Text Boxes
+
+Text boxes allow text input:
+
+```lua
+local MyTextBox = MyModule:CreateTextBox({
+    Name = "TextBoxName",
+    Default = "Default text",
+    Function = function(text)
+        -- Code that runs when text changes
+        print("New text:", text)
+    end
+})
+```
+
+## Creating Toggles
+
+Toggles are on/off switches:
+
+```lua
+local MyToggle = MyModule:CreateToggle({
+    Name = "ToggleName",
+    Default = false,  -- Default state
+    Function = function(enabled)
+        -- Code that runs when toggle changes
+        if enabled then
+            -- When enabled
+        else
+            -- When disabled
+        end
+    end
+})
+```
+
+## Creating Target Selectors
+
+For targeting settings (like you see in the AimAssist module):
+
+```lua
+local MyTargets = MyModule:CreateTargets({
+    Players = true,  -- Target players by default
+    NPCs = false     -- Don't target NPCs by default
+})
+```
