@@ -50,4 +50,9 @@ local ModuleSlider = Module:CreateSlider({
     end
 })
 ```
-##
+## Notifications
+Vape has built in notifications you can add, heres how you can do it
+```lua
+notif("Notification Text", "Notifiaction Subtext", 5, "warning")
+```
+You can do more than just warning, Alert, default (by not adding a type), Thats the end, I really dont know any more.
