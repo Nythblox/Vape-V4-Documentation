@@ -17,6 +17,15 @@ local MyModule = vape.Categories.SomeCategory:CreateModule({
 })
 ```
 
+You can also toggle your module
+
+```lua
+MyButton:Toggle(false)
+```
+```lua
+MyButton:Toggle(true)
+```
+
 ## Creating Sliders
 
 Sliders allow numerical value selection within a range:
