@@ -1,2 +1,4 @@
-# Vape-V4-Documentation
-Learn how to use vape v4 and skid!
+# Vape V4 Documentation
+This documentation will teach you how to create modules, tooltips, ETC
+> [!WARNING]
+> This isnt a real documentation by owner, Module creating, and more, they may not work.
